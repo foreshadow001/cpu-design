@@ -1,0 +1,54 @@
+﻿,,,,,,,,,
+,miniRV指令总表,,,,,,,,
+,助记符,指令格式,,,,,,使用语法,操作及解释
+,BIT#,31..25,24..20,19..15,14..12,11..7,6..0,,(r)表示寄存器r的值; Mem[addr]表示地址为addr的存储单元的值; sext(a)表示a的符号扩展
+,R-类型,funct7,rs2,rs1,funct3,rd,opcode,,
+,add,0000000,rs2,rs1,000,rd,0110011,"add rd, rs1, rs2",(rd) ← (rs1) + (rs2)
+,sub,0100000,rs2,rs1,000,rd,0110011,"sub rd, rs1, rs2",(rd) ← (rs1) - (rs2)
+,xor,0000000,rs2,rs1,100,rd,0110011,"xor rd, rs1, rs2",(rd) ← (rs1) ^ (rs2)
+,sll,0000000,rs2,rs1,001,rd,0110011,"sll rd, rs1, rs2",(rd) ← (rs1) << (rs2)
+,srl,0000000,rs2,rs1,101,rd,0110011,"srl rd, rs1, rs2","(rd) ← (rs1) >> (rs2), 逻辑右移"
+,sra,0100000,rs2,rs1,101,rd,0110011,"sra rd, rs1, rs2","(rd) ← (rs1) >> (rs2), 算术右移"
+,and,0000000,rs2,rs1,111,rd,0110011,"and rd, rs1, rs2",(rd) ← (rs1) & (rs2)
+,or,0000000,rs2,rs1,110,rd,0110011,"or rd, rs1, rs2",(rd) ← (rs1) | (rs2)
+,slt,0000000,rs2,rs1,010,rd,0110011,"slt rd, rs1, rs2","(rd) ← ((rs1) < (rs2)), 有符号比较"
+,sltu,0000000,rs2,rs1,011,rd,0110011,"sltu rd, rs1, rs2","(rd) ← ((rs1) < (rs2)), 无符号比较"
+,mul,0000001,rs2,rs1,000,rd,0110011,"mul rd, rs1, rs2",(rd) ← ((rs1) × (rs2))[31:0]
+,mulh,0000001,rs2,rs1,001,rd,0110011,"mulh rd, rs1, rs2","(rd) ← ((rs1) × (rs2))[63:32], 有符号乘法"
+,mulhu,0000001,rs2,rs1,011,rd,0110011,"mulhu rd, rs1, rs2","(rd) ← ((rs1) × (rs2))[63:32], 无符号乘法"
+,div,0000001,rs2,rs1,100,rd,0110011,"div rd, rs1, rs2","(rd) ← (rs1) / (rs2), 有符号除法"
+,divu,0000001,rs2,rs1,101,rd,0110011,"divu rd, rs1, rs2","(rd) ← (rs1) / (rs2), 无符号除法"
+,rem,0000001,rs2,rs1,110,rd,0110011,"rem rd, rs1, rs2","(rd) ← (rs1) % (rs2), 有符号除法"
+,remu,0000001,rs2,rs1,111,rd,0110011,"remu rd, rs1, rs2","(rd) ← (rs1) % (rs2), 无符号除法"
+,I-类型,imm[11:0],,rs1,funct3,rd,opcode,,
+,addi,imm[11:0],,rs1,000,rd,0010011,"addi rd, rs1, imm",(rd) ← (rs1) + sext(imm)
+,ori,imm[11:0],,rs1,110,rd,0010011,"ori rd, rs1, imm",(rd) ← (rs1) | sext(imm)
+,slli,0000000,shamt,rs1,001,rd,0010011,"slli rd, rs1, shamt",(rd) ← (rs1) << shamt
+,lw,imm[11:0],,rs1,010,rd,0000011,"lw rd, offset(rs1)",(rd) ← sext(Mem[(rs1) + sext(offset)][31:0])
+,xori,imm[11:0],,rs1,100,rd,0010011,"xori rd, rs1, imm",(rd) ← (rs1) ^ sext(imm)
+,srli,0000000,shamt,rs1,101,rd,0010011,"srli rd, rs1, shamt","(rd) ← (rs1) >> shamt, 逻辑右移"
+,srai,0100000,shamt,rs1,101,rd,0010011,"srai rd, rs1, shamt","(rd) ← (rs1) >> shamt, 算术右移"
+,lb,imm[11:0],,rs1,000,rd,0000011,"lb rd, offset(rs1)",(rd) ← sext(Mem[(rs1) + sext(offset)][7:0])
+,lbu,imm[11:0],,rs1,100,rd,0000011,"lbu rd, offset(rs1)",(rd) ← Mem[(rs1) + sext(offset)][7:0]
+,lh,imm[11:0],,rs1,001,rd,0000011,"lh rd, offset(rs1)",(rd) ← sext(Mem[(rs1) + sext(offset)][15:0])
+,lhu,imm[11:0],,rs1,101,rd,0000011,"lhu rd, offset(rs2)",(rd) ← Mem[(rs1) + sext(offset)][15:0]
+,jalr,imm[11:0],,rs1,000,rd,1100111,"jalr rd, offset(rs1)",t ← (pc) + 4; (pc) ← ((rs1) + sext(offset)) & ~1; (rd) ← t
+,andi,imm[11:0],,rs1,111,rd,0010011,"andi rd, rs1, imm",(rd) ← (rs1) & sext(imm)
+,slti,imm[11:0],,rs1,010,rd,0010011,"slti rd, rs1, imm","(rd) ← ((rs1) < sext(imm)), 有符号比较"
+,sltiu,imm[11:0],,rs1,011,rd,0010011,"sltiu rd, rs1, imm","(rd) ← ((rs1) < sext(imm)), 无符号比较"
+,S-类型,imm[11:5],rs2,rs1,funct3,imm[4:0],opcode,,
+,sb,imm[11:5],rs2,rs1,000,imm[4:0],0100011,"sb rs2, offset(rs1)",Mem[(rs1) + sext(offset)] ← (rs2)[7:0]
+,sh,imm[11:5],rs2,rs1,001,imm[4:0],0100011,"sh rs2, offset(rs1)",Mem[(rs1) + sext(offset)] ← (rs2)[15:0]
+,sw,imm[11:5],rs2,rs1,010,imm[4:0],0100011,"sw rs2, offset(rs1)",Mem[(rs1) + sext(offset)] ← (rs2)[31:0]
+,B-类型,imm[12|10:5],rs2,rs1,funct3,imm[4:1|11],opcode,,
+,beq,imm[12|10:5],rs2,rs1,000,imm[4:1|11],1100011,"beq rs1, rs2, offset",if ((rs1) = (rs2)) (pc) ← (pc) + sext(offset)
+,bne,imm[12|10:5],rs2,rs1,001,imm[4:1|11],1100011,"bne rs1, rs2, offset",if ((rs1) ≠ (rs2)) (pc) ← (pc) + sext(offset)
+,blt,imm[12|10:5],rs2,rs1,100,imm[4:1|11],1100011,"blt rs1, rs2, offset","if ((rs1) < (rs2)) (pc) ← (pc) + sext(offset), 有符号比较"
+,bltu,imm[12|10:5],rs2,rs1,110,imm[4:1|11],1100011,"bltu rs1, rs2, offset","if ((rs1) < (rs2)) (pc) ← (pc) + sext(offset), 无符号比较"
+,bge,imm[12|10:5],rs2,rs1,101,imm[4:1|11],1100011,"bge rs1, rs2, offset","if ((rs1) ≥ (rs2)) (pc) ← (pc) + sext(offset), 有符号比较"
+,bgeu,imm[12|10:5],rs2,rs1,111,imm[4:1|11],1100011,"bgeu rs1, rs2, offset","if ((rs1) ≥ (rs2)) (pc) ← (pc) + sext(offset), 无符号比较"
+,U-类型,imm[31:12],,,,rd,opcode,,
+,lui,imm[31:12],,,,rd,0110111,"lui rd, imm",(rd) ← sext(imm[31:12] << 12)
+,auipc,imm[31:12],,,,rd,0010111,"auipc rd, imm",(rd) ← (PC) + sext(imm[31:12] << 12)
+,J-类型,imm[20|10:1|11|19:12],,,,rd,opcode,,
+,jal,imm[20|10:1|11|19:12],,,,rd,1101111,"jal rd, offset",(rd) ← (pc) + 4; (pc) ← (pc) + sext(offset)

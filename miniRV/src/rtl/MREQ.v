@@ -27,15 +27,15 @@ module MREQ (
         case (ram_wop)
             `RAM_WE_B: begin
                 case (offset)
-                    2'h0: begin da_wen = 4'b0001; da_wdata = {24'h0, ram_wdata[7:0]}; end
-                    2'h1: begin da_wen = 4'b0010; da_wdata = {16'h0, ram_wdata[7:0], 8'h0}; end
-                    2'h2: begin da_wen = 4'b0100; da_wdata = {8'h0, ram_wdata[7:0], 16'h0}; end
+                    2'h0: begin da_wen = 4'b0001; da_wdata = {{24{ram_wdata[7]}}, ram_wdata[7:0]}; end
+                    2'h1: begin da_wen = 4'b0010; da_wdata = {{16{ram_wdata[7]}}, ram_wdata[7:0], 8'h0}; end
+                    2'h2: begin da_wen = 4'b0100; da_wdata = {{8{ram_wdata[7]}}, ram_wdata[7:0], 16'h0}; end
                     2'h3: begin da_wen = 4'b1000; da_wdata = {ram_wdata[7:0], 24'h0}; end
                 endcase
             end
             `RAM_WE_H: begin
                 case (offset[1])
-                    1'b0: begin da_wen = 4'b0011; da_wdata = {16'h0, ram_wdata[15:0]}; end
+                    1'b0: begin da_wen = 4'b0011; da_wdata = {{16{ram_wdata[15]}}, ram_wdata[15:0]}; end
                     1'b1: begin da_wen = 4'b1100; da_wdata = {ram_wdata[15:0], 16'h0}; end
                 endcase
             end

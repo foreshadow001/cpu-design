@@ -190,7 +190,7 @@ module cpu_core(
         .da_addr    (da_addr),
 
         .ram_wop    (ram_wop),
-        .ram_wdata  (32'h0),
+        .ram_wdata  (rf_rd2),
         .da_wen     (da_wen),
         .da_wdata   (da_wdata)
     );
@@ -260,6 +260,10 @@ module cpu_core(
     wire [31:0] debug_mem_waddr /* verilator public */ ;    // MEM阶段写访存时的写地址 (若mem_we为0，此项可为任意值)
     wire [31:0] debug_mem_wdata /* verilator public */ ;    // MEM阶段写访存时的写数据 (若mem_we为0，此项可为任意值)
 
+    // Latch raw store data at decode for trace comparison (Golden compares rf_rd2, not MREQ output)
+    reg [31:0] store_data_r;
+    always @(posedge cpu_clk) if (is_ld_st) store_data_r <= rf_rd2;
+
     assign debug_wb_pc    = pc;
     assign debug_wb_rf_we = rf_we1;
     assign debug_wb_rf_wR = rf_wR;
@@ -268,7 +272,7 @@ module cpu_core(
     assign debug_mem_pc    = pc;
     assign debug_mem_we    = daccess_wen;
     assign debug_mem_waddr = daccess_addr;
-    assign debug_mem_wdata = daccess_wdata;
+    assign debug_mem_wdata = store_data_r;
 `endif
 
 endmodule

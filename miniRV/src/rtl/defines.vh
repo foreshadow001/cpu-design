@@ -26,6 +26,7 @@
 `define NPC_JMP     2'b11
     
 `define EXT_I       3'b000
+`define EXT_S       3'b001
 `define EXT_B       3'b010
 `define EXT_U       3'b011
 `define EXT_J       3'b100

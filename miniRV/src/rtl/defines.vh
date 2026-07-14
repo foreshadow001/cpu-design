@@ -16,6 +16,9 @@
 `define ALU_SLT     5'h0A
 `define ALU_SLTU    5'h0B
 `define ALU_GE      5'h17
+`define ALU_MUL     5'h10
+`define ALU_MULH    5'h11
+`define ALU_MULHU   5'h12
 `define ALU_GEU     5'h18
 `define ALU_EQ      5'h08
 `define ALU_NE      5'h09

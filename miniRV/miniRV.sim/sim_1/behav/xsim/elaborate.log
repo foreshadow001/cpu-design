@@ -7,9 +7,9 @@ Starting static elaboration
 Pass Through NonSizing Optimizer
 WARNING: [VRFC 10-3091] actual bit length 24 differs from formal bit length 16 for port 'sw' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/sim/soc_simple_tb.v:29]
 WARNING: [VRFC 10-3091] actual bit length 24 differs from formal bit length 16 for port 'led' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/sim/soc_simple_tb.v:30]
-WARNING: [VRFC 10-3091] actual bit length 64 differs from formal bit length 66 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:84]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:105]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'r' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:106]
+WARNING: [VRFC 10-3091] actual bit length 64 differs from formal bit length 66 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:86]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:107]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'r' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:108]
 WARNING: [VRFC 10-3091] actual bit length 30 differs from formal bit length 14 for port 'addra' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Inst_ROM.v:21]
 WARNING: [VRFC 10-3091] actual bit length 30 differs from formal bit length 15 for port 'addra' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Data_RAM.v:25]
 Completed static elaboration

@@ -9,25 +9,24 @@ module MEXT (
     output reg  [31:0]  ext
 );
 
-    reg [31:0] real_din;
+    // Shift din right by byte_offs*8 so the target data is byte-aligned at LSBs
+    reg [31:0] aligned;
     always @(*) begin
         case (byte_offs)
-            2'b01  : real_din = { 8'h0, din[31: 8]};
-            2'b10  : real_din = {16'h0, din[31:16]};
-            2'b11  : real_din = {24'h0, din[31:24]};
-            default: real_din = din;
+            2'b01  : aligned = { 8'h0, din[31: 8]};
+            2'b10  : aligned = {16'h0, din[31:16]};
+            2'b11  : aligned = {24'h0, din[31:24]};
+            default: aligned = din;
         endcase
     end
 
-    // 根据访存指令的功能要求，对 从主存读取回来的数据 进行扩展.
-    // 即根据op，使用real_din产生ext
     always @(*) begin
         case (op)
-            `RAM_EXT_B : ext = 32'h0;
-            `RAM_EXT_BU: ext = 32'h0;
-            `RAM_EXT_H : ext = 32'h0;
-            `RAM_EXT_HU: ext = 32'h0;
-            default    : ext = real_din;
+            `RAM_EXT_B :  ext = {{24{aligned[ 7]}}, aligned[ 7:0]};
+            `RAM_EXT_BU:  ext = { 24'h0,            aligned[ 7:0]};
+            `RAM_EXT_H :  ext = {{16{aligned[15]}}, aligned[15:0]};
+            `RAM_EXT_HU:  ext = { 16'h0,            aligned[15:0]};
+            default    :  ext = aligned;   // RAM_EXT_W / RAM_EXT_N
         endcase
     end
 

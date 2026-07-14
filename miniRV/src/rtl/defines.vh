@@ -13,6 +13,8 @@
 `define ALU_SLL     5'h05
 `define ALU_SRL     5'h06
 `define ALU_SRA     5'h07
+`define ALU_SLT     5'h0A
+`define ALU_SLTU    5'h0B
 `define ALU_EQ      5'h08
 `define ALU_NE      5'h09
     

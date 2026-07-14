@@ -33,6 +33,8 @@ module ALU (
             `ALU_SLL  : c = a << b[4:0];
             `ALU_SRL  : c = a >> b[4:0];
             `ALU_SRA  : c = $signed(a) >>> b[4:0];
+            `ALU_SLT  : c = ($signed(a) < $signed(b)) ? 32'h1 : 32'h0;
+            `ALU_SLTU : c = (a < b) ? 32'h1 : 32'h0;
             default   : c = 32'h0;
         endcase
     end

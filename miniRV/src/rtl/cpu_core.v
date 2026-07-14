@@ -91,6 +91,7 @@ module cpu_core(
         .pc         (pc),
         .offset     (ext),
         .br         (br),
+        .alu_c      (alu_c),
         .npc        (npc),
         .pc4        (pc4)
     );

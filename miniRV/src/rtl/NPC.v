@@ -5,7 +5,8 @@ module NPC (
     input  wire [31:0]  pc,
     input  wire [31:0]  offset,
     input  wire         br,
-    
+    input  wire [31:0]  alu_c,
+
     output reg  [31:0]  npc,
     output wire [31:0]  pc4
 );
@@ -14,11 +15,12 @@ module NPC (
 
     always @(*) begin
         case (op)
-            `NPC_PC4: npc = pc4;
-            `NPC_BRA: npc = br ? pc + offset : pc4;
-            `NPC_JMP: npc = pc + offset;
-            default:  npc = pc4;
+            `NPC_PC4 : npc = pc4;
+            `NPC_JALR: npc = {alu_c[31:1], 1'b0};
+            `NPC_BRA : npc = br ? pc + offset : pc4;
+            `NPC_JMP : npc = pc + offset;
+            default  : npc = pc4;
         endcase
     end
-    
+
 endmodule

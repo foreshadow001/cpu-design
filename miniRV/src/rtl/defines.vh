@@ -15,10 +15,13 @@
 `define ALU_SRA     5'h07
 `define ALU_SLT     5'h0A
 `define ALU_SLTU    5'h0B
+`define ALU_GE      5'h17
+`define ALU_GEU     5'h18
 `define ALU_EQ      5'h08
 `define ALU_NE      5'h09
     
 `define NPC_PC4     2'b00
+`define NPC_JALR    2'b01
 `define NPC_BRA     2'b10
 `define NPC_JMP     2'b11
     

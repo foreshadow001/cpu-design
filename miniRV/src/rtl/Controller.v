@@ -32,6 +32,11 @@ module Controller (
     wire SLTIU = (opcode == 7'b0010011) && (funct3 == 3'b011);
     wire SLT   = (opcode == 7'b0110011) && (funct3 == 3'b010) && (funct7 == 7'b0000000);
     wire SLTU  = (opcode == 7'b0110011) && (funct3 == 3'b011) && (funct7 == 7'b0000000);
+    wire BLT   = (opcode == 7'b1100011) && (funct3 == 3'b100);
+    wire BGE   = (opcode == 7'b1100011) && (funct3 == 3'b101);
+    wire BLTU  = (opcode == 7'b1100011) && (funct3 == 3'b110);
+    wire BGEU  = (opcode == 7'b1100011) && (funct3 == 3'b111);
+    wire JALR  = (opcode == 7'b1100111) && (funct3 == 3'b000);
     wire ORI   = (opcode == 7'b0010011) && (funct3 == 3'b110);
     // I-type shifts
     wire SLLI  = (opcode == 7'b0010011) && (funct3 == 3'b001) && (funct7 == 7'b0000000);
@@ -49,33 +54,36 @@ module Controller (
     wire JAL   = (opcode == 7'b1101111);
  
     // npc_op
-    wire NPC_OP_BRA = BEQ | BNE;
+    wire NPC_OP_BRA = BEQ | BNE | BLT | BGE | BLTU | BGEU;
     wire NPC_OP_JMP = JAL;
-    wire NPC_OP_PC4 = !NPC_OP_BRA & !NPC_OP_JMP;
+    wire NPC_OP_JALR= JALR;
+    wire NPC_OP_PC4 = !NPC_OP_BRA & !NPC_OP_JMP & !NPC_OP_JALR;
     
     // rf_we
-    wire RF_OP_WE = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | LW | LUI | AUIPC | JAL;
+    wire RF_OP_WE = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | LW | LUI | AUIPC | JAL | JALR;
     
     // rf_wsel
     wire WB_OP_ALU = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | AUIPC;
     wire WB_OP_RAM = LW;
-    wire WB_OP_PC4 = JAL;
+    wire WB_OP_PC4 = JAL | JALR;
     wire WB_OP_EXT = LUI;
     
     // sext_op
-    wire EXT_OP_I = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW;
-    wire EXT_OP_B = BEQ | BNE;
+    wire EXT_OP_I = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW | JALR;
+    wire EXT_OP_B = BEQ | BNE | BLT | BGE | BLTU | BGEU;
     wire EXT_OP_U = LUI | AUIPC;
     wire EXT_OP_J = JAL;
     
     // alu_op
-    wire ALU_OP_ADD   = ADDI | ADD | LW | AUIPC;
+    wire ALU_OP_ADD   = ADDI | ADD | LW | AUIPC | JALR;
     wire ALU_OP_SUB   = SUB;
     wire ALU_OP_OR    = ORI | OR;
     wire ALU_OP_XOR   = XORI | XOR;
     wire ALU_OP_AND   = ANDI | AND;
-    wire ALU_OP_SLT   = SLTI | SLT;
-    wire ALU_OP_SLTU  = SLTIU | SLTU;
+    wire ALU_OP_SLT   = SLTI | SLT | BLT;
+    wire ALU_OP_SLTU  = SLTIU | SLTU | BLTU;
+    wire ALU_OP_GE    = BGE;
+    wire ALU_OP_GEU   = BGEU;
     wire ALU_OP_SLL   = SLLI | SLL;
     wire ALU_OP_SRL   = SRLI | SRL;
     wire ALU_OP_SRA   = SRAI | SRA;
@@ -83,12 +91,12 @@ module Controller (
     wire ALU_OP_NE    = BNE;
     
     // alua_sel
-    wire ALU_A_SEL_RS1 = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | LW | BEQ | BNE | JAL;
+    wire ALU_A_SEL_RS1 = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | LW | BEQ | BNE | BLT | BGE | BLTU | BGEU | JAL | JALR;
     wire ALU_A_SEL_PC  = AUIPC;
                         
     // alub_sel
-    wire ALU_B_SEL_RS2 = BEQ | BNE | SLL | SRL | SRA | ADD | SUB | XOR | AND | OR | SLT | SLTU;
-    wire ALU_B_SEL_EXT = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW | JAL | AUIPC;
+    wire ALU_B_SEL_RS2 = BEQ | BNE | BLT | BGE | BLTU | BGEU | SLL | SRL | SRA | ADD | SUB | XOR | AND | OR | SLT | SLTU;
+    wire ALU_B_SEL_EXT = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW | JAL | AUIPC | JALR;
         
     // ram_r_op
     wire RAM_EXT_B  = 1'b0;
@@ -102,9 +110,10 @@ module Controller (
     wire RAM_W_H  = 1'b0;
     wire RAM_W_W  = 1'b0;
     
-    assign npc_op = {2{NPC_OP_PC4}} & `NPC_PC4
-                  | {2{NPC_OP_BRA}} & `NPC_BRA
-                  | {2{NPC_OP_JMP}} & `NPC_JMP;
+    assign npc_op = {2{NPC_OP_PC4}}  & `NPC_PC4
+                  | {2{NPC_OP_JALR}} & `NPC_JALR
+                  | {2{NPC_OP_BRA}}  & `NPC_BRA
+                  | {2{NPC_OP_JMP}}  & `NPC_JMP;
 
     assign rf_we = RF_OP_WE;
 
@@ -125,6 +134,8 @@ module Controller (
                   | {5{ALU_OP_OR   }} & `ALU_OR
                   | {5{ALU_OP_SLT  }} & `ALU_SLT
                   | {5{ALU_OP_SLTU }} & `ALU_SLTU
+                  | {5{ALU_OP_GE   }} & `ALU_GE
+                  | {5{ALU_OP_GEU  }} & `ALU_GEU
                   | {5{ALU_OP_SLL  }} & `ALU_SLL
                   | {5{ALU_OP_SRL  }} & `ALU_SRL
                   | {5{ALU_OP_SRA  }} & `ALU_SRA

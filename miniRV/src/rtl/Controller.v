@@ -47,6 +47,10 @@ module Controller (
     wire MUL   = (opcode == 7'b0110011) && (funct3 == 3'b000) && (funct7 == 7'b0000001);
     wire MULH  = (opcode == 7'b0110011) && (funct3 == 3'b001) && (funct7 == 7'b0000001);
     wire MULHU = (opcode == 7'b0110011) && (funct3 == 3'b011) && (funct7 == 7'b0000001);
+    wire DIV   = (opcode == 7'b0110011) && (funct3 == 3'b100) && (funct7 == 7'b0000001);
+    wire DIVU  = (opcode == 7'b0110011) && (funct3 == 3'b101) && (funct7 == 7'b0000001);
+    wire REM   = (opcode == 7'b0110011) && (funct3 == 3'b110) && (funct7 == 7'b0000001);
+    wire REMU  = (opcode == 7'b0110011) && (funct3 == 3'b111) && (funct7 == 7'b0000001);
     wire ORI   = (opcode == 7'b0010011) && (funct3 == 3'b110);
     // I-type shifts
     wire SLLI  = (opcode == 7'b0010011) && (funct3 == 3'b001) && (funct7 == 7'b0000000);
@@ -70,10 +74,10 @@ module Controller (
     wire NPC_OP_PC4 = !NPC_OP_BRA & !NPC_OP_JMP & !NPC_OP_JALR;
     
     // rf_we
-    wire RF_OP_WE = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | LW | LB | LBU | LH | LHU | LUI | AUIPC | JAL | JALR | MUL | MULH | MULHU;
+    wire RF_OP_WE = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | LW | LB | LBU | LH | LHU | LUI | AUIPC | JAL | JALR | MUL | MULH | MULHU | DIV | DIVU | REM | REMU;
     
     // rf_wsel
-    wire WB_OP_ALU = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | MUL | MULH | MULHU | AUIPC;
+    wire WB_OP_ALU = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | MUL | MULH | MULHU | DIV | DIVU | REM | REMU | AUIPC;
     wire WB_OP_RAM = LW | LB | LBU | LH | LHU;
     wire WB_OP_PC4 = JAL | JALR;
     wire WB_OP_EXT = LUI;
@@ -98,6 +102,10 @@ module Controller (
     wire ALU_OP_MUL   = MUL;
     wire ALU_OP_MULH  = MULH;
     wire ALU_OP_MULHU = MULHU;
+    wire ALU_OP_DIV   = DIV;
+    wire ALU_OP_DIVU  = DIVU;
+    wire ALU_OP_REM   = REM;
+    wire ALU_OP_REMU  = REMU;
     wire ALU_OP_SLL   = SLLI | SLL;
     wire ALU_OP_SRL   = SRLI | SRL;
     wire ALU_OP_SRA   = SRAI | SRA;
@@ -105,11 +113,11 @@ module Controller (
     wire ALU_OP_NE    = BNE;
     
     // alua_sel
-    wire ALU_A_SEL_RS1 = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | MUL | MULH | MULHU | LW | LB | LBU | LH | LHU | SB | SH | SW | BEQ | BNE | BLT | BGE | BLTU | BGEU | JAL | JALR;
+    wire ALU_A_SEL_RS1 = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | MUL | MULH | MULHU | DIV | DIVU | REM | REMU | LW | LB | LBU | LH | LHU | SB | SH | SW | BEQ | BNE | BLT | BGE | BLTU | BGEU | JAL | JALR;
     wire ALU_A_SEL_PC  = AUIPC;
                         
     // alub_sel
-    wire ALU_B_SEL_RS2 = BEQ | BNE | BLT | BGE | BLTU | BGEU | SLL | SRL | SRA | ADD | SUB | XOR | AND | OR | SLT | SLTU | MUL | MULH | MULHU;
+    wire ALU_B_SEL_RS2 = BEQ | BNE | BLT | BGE | BLTU | BGEU | SLL | SRL | SRA | ADD | SUB | XOR | AND | OR | SLT | SLTU | MUL | MULH | MULHU | DIV | DIVU | REM | REMU;
     wire ALU_B_SEL_EXT = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW | LB | LBU | LH | LHU | SB | SH | SW | JAL | AUIPC | JALR;
         
     // ram_r_op
@@ -154,6 +162,10 @@ module Controller (
                   | {5{ALU_OP_MUL  }} & `ALU_MUL
                   | {5{ALU_OP_MULH }} & `ALU_MULH
                   | {5{ALU_OP_MULHU}} & `ALU_MULHU
+                  | {5{ALU_OP_DIV  }} & `ALU_DIV
+                  | {5{ALU_OP_DIVU }} & `ALU_DIVU
+                  | {5{ALU_OP_REM  }} & `ALU_REM
+                  | {5{ALU_OP_REMU }} & `ALU_REMU
                   | {5{ALU_OP_SLL  }} & `ALU_SLL
                   | {5{ALU_OP_SRL  }} & `ALU_SRL
                   | {5{ALU_OP_SRA  }} & `ALU_SRA
@@ -175,6 +187,6 @@ module Controller (
                     | {4{RAM_W_W}} & `RAM_WE_W;
 
     assign is_mul = MUL | MULH | MULHU;
-    assign is_div = 1'b0;
+    assign is_div = DIV | DIVU | REM | REMU;
 
 endmodule

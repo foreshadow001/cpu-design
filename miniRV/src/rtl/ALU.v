@@ -43,6 +43,10 @@ module ALU (
                 if (b_latched[31]) c = c - a_latched;
             end
             `ALU_MULHU: c = mulu_res[63:32];
+            `ALU_DIV  : c = (a_latched[31] ^ b_latched[31]) ? (-$signed(div_quo)) : div_quo;
+            `ALU_DIVU : c = divu_quo;
+            `ALU_REM  : c = a_latched[31] ? (-$signed(div_rem)) : div_rem;
+            `ALU_REMU : c = divu_rem;
             default   : c = 32'h0;
         endcase
     end
@@ -61,8 +65,8 @@ module ALU (
 
     assign mul_flag  = (op == `ALU_MUL) || (op == `ALU_MULH);
     assign mulu_flag = (op == `ALU_MULHU);
-    assign div_flag  = 1'b0;
-    assign divu_flag = 1'b0;
+    assign div_flag  = (op == `ALU_DIV) || (op == `ALU_REM);
+    assign divu_flag = (op == `ALU_DIVU) || (op == `ALU_REMU);
     assign busy      = mul_busy | mulu_busy | div_busy | divu_busy;
 
     // Latch operands for signed correction in mulh
@@ -99,8 +103,8 @@ module ALU (
     divider #(32) U_div (
         .clk    (clk),
         .rst    (rst),
-        .x      (a[31] ? {1'b1, ~a[30:0] + 31'h1} : a),
-        .y      (b[31] ? {1'b1, ~b[30:0] + 31'h1} : b),
+        .x      (a[31] ? (~a + 1) : a),
+        .y      (b[31] ? (~b + 1) : b),
         .start  (div_flag),
         .z      (div_quo),
         .r      (div_rem),

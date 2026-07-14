@@ -40,7 +40,22 @@
       "Bash(python3)",
       "Bash(python3 -c \"import openpyxl; print\\('OK'\\)\")",
       "Bash(python -c \"import openpyxl; print\\('openpyxl OK'\\)\")",
-      "Bash(python)"
+      "Bash(python)",
+      "Bash(python design/gen_excel.py)",
+      "Bash(python design/fix_excel.py)",
+      "Bash(python -c ' *)",
+      "Bash(python design/graph/example-5ins/gen_excel.py)",
+      "Bash(python design/graph/example-5ins/fix_merge.py)",
+      "Bash(python design/graph/example-5ins/fix_rows.py)",
+      "Bash(python design/graph/example-5ins/fix_rows2.py)",
+      "Bash(python fix_full_excel.py)",
+      "Bash(python design/graph/example-5ins/fix_sheet2.py)",
+      "Bash(python design/graph/example-5ins/fix_sheet2b.py)",
+      "Bash(rm design/graph/example-5ins/fix_sheet2b.py)",
+      "Bash(python design/graph/gen_44ins_excel.py)",
+      "Bash(python design/graph/gen_44ins_v2.py)",
+      "Bash(python design/graph/gen_44_final.py)",
+      "Bash(rm design/graph/gen_44_final.py)"
     ]
   }
 }

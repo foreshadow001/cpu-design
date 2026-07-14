@@ -7,10 +7,47 @@ Starting static elaboration
 Pass Through NonSizing Optimizer
 WARNING: [VRFC 10-3091] actual bit length 24 differs from formal bit length 16 for port 'sw' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/sim/soc_simple_tb.v:29]
 WARNING: [VRFC 10-3091] actual bit length 24 differs from formal bit length 16 for port 'led' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/sim/soc_simple_tb.v:30]
-WARNING: [VRFC 10-3091] actual bit length 64 differs from formal bit length 66 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:73]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:94]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'r' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:95]
+WARNING: [VRFC 10-3091] actual bit length 64 differs from formal bit length 66 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:76]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:97]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'r' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:98]
 WARNING: [VRFC 10-3091] actual bit length 30 differs from formal bit length 14 for port 'addra' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Inst_ROM.v:21]
 WARNING: [VRFC 10-3091] actual bit length 30 differs from formal bit length 15 for port 'addra' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Data_RAM.v:25]
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.IBUF
+Compiling module unisims_ver.PLLE2_ADV(CLKFBOUT_MULT=17,CLKIN...
+Compiling module unisims_ver.BUFG
+Compiling module xil_defaultlib.clk_wiz_0_clk_wiz
+Compiling module xil_defaultlib.clk_wiz_0
+Compiling module xil_defaultlib.NPC
+Compiling module xil_defaultlib.PC
+Compiling module xil_defaultlib.Controller
+Compiling module xil_defaultlib.RF
+Compiling module xil_defaultlib.SEXT
+Compiling module xil_defaultlib.multiplier_default
+Compiling module xil_defaultlib.multiplier(WIDTH=33)
+Compiling module xil_defaultlib.divider
+Compiling module xil_defaultlib.divider(WIDTH=33)
+Compiling module xil_defaultlib.ALU
+Compiling module xil_defaultlib.MREQ
+Compiling module xil_defaultlib.MEXT
+Compiling module xil_defaultlib.cpu_core
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_output_stage(...
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_softecc_outpu...
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_mem_module(C_...
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7(C_FAMILY="art...
+Compiling module xil_defaultlib.IROM
+Compiling module xil_defaultlib.Inst_ROM
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_output_stage(...
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_softecc_outpu...
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_mem_module(C_...
+Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7(C_FAMILY="art...
+Compiling module xil_defaultlib.DRAM
+Compiling module xil_defaultlib.Data_RAM
+Compiling module xil_defaultlib.cpu_top
+Compiling module xil_defaultlib.miniRV_SoC
+Compiling module xil_defaultlib.soc_simple_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot soc_simple_tb_behav

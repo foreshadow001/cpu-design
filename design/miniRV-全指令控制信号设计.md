@@ -20,9 +20,9 @@
 | lbu | NPC.npc | PC.pc | - | - | IN.inst[19:15] | - | IN.inst[11:7] | MEXT.ext | IN.inst[31:20] | RF.rD1 | SEXT.ext | ALU.C | - | IN.daccess_rdata | ALU.C[1:0] |
 | lh | NPC.npc | PC.pc | - | - | IN.inst[19:15] | - | IN.inst[11:7] | MEXT.ext | IN.inst[31:20] | RF.rD1 | SEXT.ext | ALU.C | - | IN.daccess_rdata | ALU.C[1:0] |
 | lhu | NPC.npc | PC.pc | - | - | IN.inst[19:15] | - | IN.inst[11:7] | MEXT.ext | IN.inst[31:20] | RF.rD1 | SEXT.ext | ALU.C | - | IN.daccess_rdata | ALU.C[1:0] |
-| sb | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31:20] | RF.rD1 | SEXT.ext | ALU.C | RF.rD2 | - | - |
-| sh | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31:20] | RF.rD1 | SEXT.ext | ALU.C | RF.rD2 | - | - |
-| sw | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31:20] | RF.rD1 | SEXT.ext | ALU.C | RF.rD2 | - | - |
+| sb | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31:7] | RF.rD1 | SEXT.ext | ALU.C | RF.rD2 | - | - |
+| sh | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31:7] | RF.rD1 | SEXT.ext | ALU.C | RF.rD2 | - | - |
+| sw | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31:7] | RF.rD1 | SEXT.ext | ALU.C | RF.rD2 | - | - |
 | add | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | IN.inst[11:7] | ALU.C | - | RF.rD1 | RF.rD2 | - | - | - | - |
 | sub | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | IN.inst[11:7] | ALU.C | - | RF.rD1 | RF.rD2 | - | - | - | - |
 | xor | NPC.npc | PC.pc | - | - | IN.inst[19:15] | IN.inst[24:20] | IN.inst[11:7] | ALU.C | - | RF.rD1 | RF.rD2 | - | - | - | - |
@@ -47,10 +47,10 @@
 | bge | NPC.npc | PC.pc | SEXT.ext | ALU.br | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31\|7\|30:25\|11:8] | RF.rD1 | RF.rD2 | - | - | - | - |
 | bgeu | NPC.npc | PC.pc | SEXT.ext | ALU.br | IN.inst[19:15] | IN.inst[24:20] | - | - | IN.inst[31\|7\|30:25\|11:8] | RF.rD1 | RF.rD2 | - | - | - | - |
 | lui | NPC.npc | PC.pc | - | - | - | - | IN.inst[11:7] | SEXT.ext | IN.inst[31:12] | - | - | - | - | - | - |
-| auipc | NPC.npc | PC.pc | - | - | - | - | IN.inst[11:7] | ALU.C | IN.inst[31:12] | PC | SEXT.ext | - | - | - | - |
+| auipc | NPC.npc | PC.pc | - | - | - | - | IN.inst[11:7] | ALU.C | IN.inst[31:12] | PC.pc | SEXT.ext | - | - | - | - |
 | jal | NPC.npc | PC.pc | SEXT.ext | - | - | - | IN.inst[11:7] | NPC.pc4 | IN.inst[31\|19:12\|20\|30:21] | - | - | - | - | - | - |
-| jalr | NPC.npc | PC.pc | SEXT.ext | - | IN.inst[19:15] | - | IN.inst[11:7] | NPC.pc4 | IN.inst[31:20] | RF.rD1 | SEXT.ext | - | - | - | - |
-| **综合** | NPC.npc | PC.pc | SEXT.ext | ALU.br | IN.inst[19:15] | IN.inst[24:20] | IN.inst[11:7] | ALU.C / SEXT.ext / MEXT.ext / NPC.pc4 | IN.inst[31:7] | RF.rD1 / PC | RF.rD2 / SEXT.ext | ALU.C | RF.rD2 | IN.daccess_rdata | ALU.C[1:0] |
+| jalr | NPC.npc | PC.pc | - | - | IN.inst[19:15] | - | IN.inst[11:7] | NPC.pc4 | IN.inst[31:20] | RF.rD1 | SEXT.ext | - | - | - | - |
+| **综合** | NPC.npc | PC.pc | SEXT.ext | ALU.br | IN.inst[19:15] | IN.inst[24:20] | IN.inst[11:7] | ALU.C / SEXT.ext / MEXT.ext / NPC.pc4 | IN.inst[31:7] | RF.rD1 / PC.pc | RF.rD2 / SEXT.ext | ALU.C | RF.rD2 | IN.daccess_rdata | ALU.C[1:0] |
 | **操作选择信号** | - | - | npc_op | - | - | - | rf_we | - | sext_op | alu_op | - | ram_rop | ram_wop | ram_rop | - |
 | **多路选择信号** | - | - | - | - | - | - | - | rf_wsel | - | alua_sel | alub_sel | - | - | - | - |
 | **多周期标志** | - | - | - | - | - | - | - | - | - | is_mul / is_div | - | - | - | - | - |
@@ -63,14 +63,16 @@
 |----------|------|----------|---------|--------|
 | **npc_op** | `PC4` | npc = PC + 4 | 全部非跳转/分支 | `` `define NPC_PC4 2'b00 `` |
 | | `BRANCH` | npc = br ? PC+offset : PC+4 | beq, bne, blt, bltu, bge, bgeu | `` `define NPC_BRA 2'b10 `` |
-| | `JUMP` | npc = PC + offset | jal, jalr | `` `define NPC_JMP 2'b11 `` |
+| | `JAL` | npc = PC + offset | jal | `` `define NPC_JAL 2'b11 `` |
+| | `JALR` | npc = {alu_c[31:1], 1'b0} | jalr | `` `define NPC_JALR 2'b01 `` |
 | **rf_we** | `1` | 允许写寄存器 | 全部非store/非branch | — |
 | | `0` | 禁止写寄存器 | sb, sh, sw, beq, bne, blt, bltu, bge, bgeu | — |
 | **rf_wsel** | `WB_ALU` | wD = ALU.C | R型全部, I型算术逻辑, auipc | `` `define WB_ALU 2'b00 `` |
 | | `WB_RAM` | wD = MEXT.ext | lw, lb, lbu, lh, lhu | `` `define WB_RAM 2'b01 `` |
 | | `WB_PC4` | wD = NPC.pc4 | jal, jalr | `` `define WB_PC4 2'b10 `` |
 | | `WB_EXT` | wD = SEXT.ext | lui | `` `define WB_EXT 2'b11 `` |
-| **sext_op** | `I_TYPE` | {{20{imm[31]}}, imm[31:20]} | 全部I型 + 全部S型 | `` `define EXT_I 3'b000 `` |
+| **sext_op** | `I_TYPE` | {{20{imm[31]}}, imm[31:20]} | 全部I型(含load/jalr) | `` `define EXT_I 3'b000 `` |
+| | `S_TYPE` | {{20{imm[31]}}, imm[31:25], imm[11:7]} | sb, sh, sw | `` `define EXT_S 3'b001 `` |
 | | `B_TYPE` | {{19{imm[31]}}, imm[31], imm[7], imm[30:25], imm[11:8], 1'b0} | 全部B型 | `` `define EXT_B 3'b010 `` |
 | | `U_TYPE` | {imm[31:12], 12'h0} | lui, auipc | `` `define EXT_U 3'b011 `` |
 | | `J_TYPE` | {{11{imm[31]}}, imm[31], imm[19:12], imm[20], imm[30:21], 1'b0} | jal | `` `define EXT_J 3'b100 `` |
@@ -81,7 +83,7 @@
 | | `AND` | C = A & B | and, andi | `` `define ALU_AND 5'h04 `` |
 | | `SLL` | C = A << B[4:0] | sll, slli | `` `define ALU_SLL 5'h05 `` |
 | | `SRL` | C = A >> B[4:0] (逻辑) | srl, srli | `` `define ALU_SRL 5'h06 `` |
-| | `SRA` | C = A >>> B[4:0] (算术) | sra, srai | `` `define ALU_SRA 5'h07 `` |
+| | `SRA` | C = $signed(A) >>> B[4:0] (算术) | sra, srai | `` `define ALU_SRA 5'h07 `` |
 | | `EQ` | br = (A == B) | beq | `` `define ALU_EQ 5'h08 `` |
 | | `NE` | br = (A != B) | bne | `` `define ALU_NE 5'h09 `` |
 | | `SLT` | br/C = (A < B) 有符号 | slt, slti, blt | `` `define ALU_SLT 5'h0A `` |
@@ -96,10 +98,10 @@
 | | `GE` | br = (A >= B) 有符号 | bge | `` `define ALU_GE 5'h17 `` |
 | | `GEU` | br = (A >= B) 无符号 | bgeu | `` `define ALU_GEU 5'h18 `` |
 | | `-` | 不使用ALU | lui, jal | — |
-| **alua_sel** | `SEL_RS1` | ALU.A = RF.rD1 | 绝大多数指令 | `` `define ALU_A_RS1 1'b0 `` |
-| | `SEL_PC` | ALU.A = PC | auipc | `` `define ALU_A_PC 1'b1 `` |
-| **alub_sel** | `SEL_RS2` | ALU.B = RF.rD2 | 全部R型 + 全部B型 | `` `define ALU_B_RS2 1'b0 `` |
-| | `SEL_EXT` | ALU.B = SEXT.ext | 全部I型(含load/store) + auipc | `` `define ALU_B_EXT 1'b1 `` |
+| **alua_sel** | `ALU_A_RS1` | ALU.A = RF.rD1 | 绝大多数指令 | `` `define ALU_A_RS1 1'b0 `` |
+| | `ALU_A_PC` | ALU.A = PC.pc | auipc | `` `define ALU_A_PC 1'b1 `` |
+| **alub_sel** | `ALU_B_RS2` | ALU.B = RF.rD2 | 全部R型 + 全部B型 | `` `define ALU_B_RS2 1'b0 `` |
+| | `ALU_B_EXT` | ALU.B = SEXT.ext | 全部I型(含load/store) + auipc | `` `define ALU_B_EXT 1'b1 `` |
 | **ram_rop** | `0` | 不读访存 | 非load指令 | `` `define RAM_EXT_N 3'b000 `` |
 | | `BYTE_EXT` | 读字节, 有符号扩展 | lb | `` `define RAM_EXT_B 3'b001 `` |
 | | `BYTEU_EXT` | 读字节, 无符号扩展 | lbu | `` `define RAM_EXT_BU 3'b011 `` |
@@ -119,49 +121,82 @@
 
 | 指令 | opcode | funct3 | funct7 | npc_op | rf_we | rf_wsel | sext_op | alu_op | alub_sel | ram_rop | alua_sel | ram_wop | is_mul | is_div |
 |------|--------|--------|--------|--------|-------|---------|---------|--------|-----------|---------|----------|---------|--------|--------|
-| addi | 0010011 | 000 | - | PC4 | 1 | WB_ALU | I_TYPE | ADD | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| ori  | 0010011 | 110 | - | PC4 | 1 | WB_ALU | I_TYPE | OR | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| slli | 0010011 | 001 | 0000000 | PC4 | 1 | WB_ALU | I_TYPE | SLL | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| xori | 0010011 | 100 | - | PC4 | 1 | WB_ALU | I_TYPE | XOR | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| srli | 0010011 | 101 | 0000000 | PC4 | 1 | WB_ALU | I_TYPE | SRL | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| srai | 0010011 | 101 | 0100000 | PC4 | 1 | WB_ALU | I_TYPE | SRA | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| andi | 0010011 | 111 | - | PC4 | 1 | WB_ALU | I_TYPE | AND | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| slti | 0010011 | 010 | - | PC4 | 1 | WB_ALU | I_TYPE | SLT | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| sltiu| 0010011 | 011 | - | PC4 | 1 | WB_ALU | I_TYPE | SLTU | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
-| lw   | 0000011 | 010 | - | PC4 | 1 | WB_RAM | I_TYPE | ADD | SEL_EXT | WORD_EXT | SEL_RS1 | 0 | 0 | 0 |
-| lb   | 0000011 | 000 | - | PC4 | 1 | WB_RAM | I_TYPE | ADD | SEL_EXT | BYTE_EXT | SEL_RS1 | 0 | 0 | 0 |
-| lbu  | 0000011 | 100 | - | PC4 | 1 | WB_RAM | I_TYPE | ADD | SEL_EXT | BYTEU_EXT | SEL_RS1 | 0 | 0 | 0 |
-| lh   | 0000011 | 001 | - | PC4 | 1 | WB_RAM | I_TYPE | ADD | SEL_EXT | HALF_EXT | SEL_RS1 | 0 | 0 | 0 |
-| lhu  | 0000011 | 101 | - | PC4 | 1 | WB_RAM | I_TYPE | ADD | SEL_EXT | HALFU_EXT | SEL_RS1 | 0 | 0 | 0 |
-| sb | 0100011 | 000 | - | PC4 | 0 | - | I_TYPE | ADD | SEL_EXT | 0 | SEL_RS1 | BYTE_WE | 0 | 0 |
-| sh | 0100011 | 001 | - | PC4 | 0 | - | I_TYPE | ADD | SEL_EXT | 0 | SEL_RS1 | HALF_WE | 0 | 0 |
-| sw | 0100011 | 010 | - | PC4 | 0 | - | I_TYPE | ADD | SEL_EXT | 0 | SEL_RS1 | WORD_WE | 0 | 0 |
-| add | 0110011 | 000 | 0000000 | PC4 | 1 | WB_ALU | - | ADD | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| sub | 0110011 | 000 | 0100000 | PC4 | 1 | WB_ALU | - | SUB | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| xor | 0110011 | 100 | 0000000 | PC4 | 1 | WB_ALU | - | XOR | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| sll | 0110011 | 001 | 0000000 | PC4 | 1 | WB_ALU | - | SLL | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| srl | 0110011 | 101 | 0000000 | PC4 | 1 | WB_ALU | - | SRL | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| sra | 0110011 | 101 | 0100000 | PC4 | 1 | WB_ALU | - | SRA | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| and | 0110011 | 111 | 0000000 | PC4 | 1 | WB_ALU | - | AND | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| or  | 0110011 | 110 | 0000000 | PC4 | 1 | WB_ALU | - | OR  | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| slt | 0110011 | 010 | 0000000 | PC4 | 1 | WB_ALU | - | SLT | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| sltu| 0110011 | 011 | 0000000 | PC4 | 1 | WB_ALU | - | SLTU | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| mul | 0110011 | 000 | 0000001 | PC4 | 1 | WB_ALU | - | MUL | SEL_RS2 | 0 | SEL_RS1 | 0 | 1 | 0 |
-| mulh| 0110011 | 001 | 0000001 | PC4 | 1 | WB_ALU | - | MULH | SEL_RS2 | 0 | SEL_RS1 | 0 | 1 | 0 |
-| mulhu|0110011 | 011 | 0000001 | PC4 | 1 | WB_ALU | - | MULHU | SEL_RS2 | 0 | SEL_RS1 | 0 | 1 | 0 |
-| div | 0110011 | 100 | 0000001 | PC4 | 1 | WB_ALU | - | DIV | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 1 |
-| divu| 0110011 | 101 | 0000001 | PC4 | 1 | WB_ALU | - | DIVU | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 1 |
-| rem | 0110011 | 110 | 0000001 | PC4 | 1 | WB_ALU | - | REM | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 1 |
-| remu| 0110011 | 111 | 0000001 | PC4 | 1 | WB_ALU | - | REMU | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 1 |
-| beq  | 1100011 | 000 | - | BRANCH | 0 | - | B_TYPE | EQ | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| bne  | 1100011 | 001 | - | BRANCH | 0 | - | B_TYPE | NE | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| blt  | 1100011 | 100 | - | BRANCH | 0 | - | B_TYPE | SLT | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| bltu | 1100011 | 110 | - | BRANCH | 0 | - | B_TYPE | SLTU | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| bge  | 1100011 | 101 | - | BRANCH | 0 | - | B_TYPE | GE | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| bgeu | 1100011 | 111 | - | BRANCH | 0 | - | B_TYPE | GEU | SEL_RS2 | 0 | SEL_RS1 | 0 | 0 | 0 |
-| lui   | 0110111 | - | - | PC4 | 1 | WB_EXT | U_TYPE | - | - | 0 | - | 0 | 0 | 0 |
-| auipc | 0010111 | - | - | PC4 | 1 | WB_ALU | U_TYPE | ADD | SEL_EXT | 0 | SEL_PC | 0 | 0 | 0 |
-| jal | 1101111 | - | - | JUMP | 1 | WB_PC4 | J_TYPE | - | - | 0 | - | 0 | 0 | 0 |
-| jalr| 1100111 | 000 | - | JUMP | 1 | WB_PC4 | I_TYPE | ADD | SEL_EXT | 0 | SEL_RS1 | 0 | 0 | 0 |
+| addi | 0010011 | 000 | - | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| ori  | 0010011 | 110 | - | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_OR  | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| slli | 0010011 | 001 | 0000000 | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_SLL | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| xori | 0010011 | 100 | - | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_XOR | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| srli | 0010011 | 101 | 0000000 | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_SRL | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| srai | 0010011 | 101 | 0100000 | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_SRA | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| andi | 0010011 | 111 | - | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_AND | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| slti | 0010011 | 010 | - | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_SLT | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| sltiu| 0010011 | 011 | - | NPC_PC4 | 1 | WB_ALU | EXT_I | ALU_SLTU| ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| lw   | 0000011 | 010 | - | NPC_PC4 | 1 | WB_RAM | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_W | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| lb   | 0000011 | 000 | - | NPC_PC4 | 1 | WB_RAM | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_B | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| lbu  | 0000011 | 100 | - | NPC_PC4 | 1 | WB_RAM | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_BU| ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| lh   | 0000011 | 001 | - | NPC_PC4 | 1 | WB_RAM | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_H | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| lhu  | 0000011 | 101 | - | NPC_PC4 | 1 | WB_RAM | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_HU| ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| sb | 0100011 | 000 | - | NPC_PC4 | 0 | - | EXT_S | ALU_ADD | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_B | 0 | 0 |
+| sh | 0100011 | 001 | - | NPC_PC4 | 0 | - | EXT_S | ALU_ADD | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_H | 0 | 0 |
+| sw | 0100011 | 010 | - | NPC_PC4 | 0 | - | EXT_S | ALU_ADD | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_W | 0 | 0 |
+| add | 0110011 | 000 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_ADD | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| sub | 0110011 | 000 | 0100000 | NPC_PC4 | 1 | WB_ALU | - | ALU_SUB | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| xor | 0110011 | 100 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_XOR | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| sll | 0110011 | 001 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_SLL | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| srl | 0110011 | 101 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_SRL | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| sra | 0110011 | 101 | 0100000 | NPC_PC4 | 1 | WB_ALU | - | ALU_SRA | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| and | 0110011 | 111 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_AND | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| or  | 0110011 | 110 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_OR  | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| slt | 0110011 | 010 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_SLT | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| sltu| 0110011 | 011 | 0000000 | NPC_PC4 | 1 | WB_ALU | - | ALU_SLTU| ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| mul | 0110011 | 000 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_MUL | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 1 | 0 |
+| mulh| 0110011 | 001 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_MULH| ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 1 | 0 |
+| mulhu|0110011 | 011 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_MULHU|ALU_B_RS2| RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 1 | 0 |
+| div | 0110011 | 100 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_DIV | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 1 |
+| divu| 0110011 | 101 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_DIVU| ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 1 |
+| rem | 0110011 | 110 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_REM | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 1 |
+| remu| 0110011 | 111 | 0000001 | NPC_PC4 | 1 | WB_ALU | - | ALU_REMU| ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 1 |
+| beq  | 1100011 | 000 | - | NPC_BRA | 0 | - | EXT_B | ALU_EQ  | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| bne  | 1100011 | 001 | - | NPC_BRA | 0 | - | EXT_B | ALU_NE  | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| blt  | 1100011 | 100 | - | NPC_BRA | 0 | - | EXT_B | ALU_SLT | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| bltu | 1100011 | 110 | - | NPC_BRA | 0 | - | EXT_B | ALU_SLTU| ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| bge  | 1100011 | 101 | - | NPC_BRA | 0 | - | EXT_B | ALU_GE  | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| bgeu | 1100011 | 111 | - | NPC_BRA | 0 | - | EXT_B | ALU_GEU | ALU_B_RS2 | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
+| lui   | 0110111 | - | - | NPC_PC4 | 1 | WB_EXT | EXT_U | -        | -         | RAM_EXT_N | -         | RAM_WE_N | 0 | 0 |
+| auipc | 0010111 | - | - | NPC_PC4 | 1 | WB_ALU | EXT_U | ALU_ADD | ALU_B_EXT | RAM_EXT_N | ALU_A_PC  | RAM_WE_N | 0 | 0 |
+| jal | 1101111 | - | - | NPC_JAL | 1 | WB_PC4 | EXT_J | -        | -         | RAM_EXT_N | -         | RAM_WE_N | 0 | 0 |
+| jalr| 1100111 | 000 | - | NPC_JALR| 1 | WB_PC4 | EXT_I | ALU_ADD | ALU_B_EXT | RAM_EXT_N | ALU_A_RS1 | RAM_WE_N | 0 | 0 |
 
-> `-` = don't-care。控制信号命名采用模板约定：`PC4/BRANCH/JUMP`, `I_TYPE/B_TYPE/U_TYPE/J_TYPE`, `SEL_EXT/SEL_RS2/SEL_RS1/SEL_PC`, `WORD_EXT/BYTE_EXT/...`, `BYTE_WE/HALF_WE/WORD_WE`。
+> `-` = don't-care。
+
+## 实现注意事项
+
+### Store 写掩码与地址对齐
+
+`RAM_WE_B` (0001)、`RAM_WE_H` (0011) 仅表示写类型，**实际字节使能必须由 MREQ 结合 `ram_addr[1:0]` 产生**：
+
+| 指令 | addr[1:0] | da_wen | da_wdata 处理 |
+|------|-----------|--------|-------------|
+| sb | 0 | 4'b0001 | wdata[7:0] 在 byte 0 |
+| sb | 1 | 4'b0010 | wdata[7:0] << 8 |
+| sb | 2 | 4'b0100 | wdata[7:0] << 16 |
+| sb | 3 | 4'b1000 | wdata[7:0] << 24 |
+| sh | 0 | 4'b0011 | wdata[15:0] 在 half 0 |
+| sh | 2 | 4'b1100 | wdata[15:0] << 16 |
+| sw | 0 | 4'b1111 | wdata 直通 |
+
+### 移位量 B[4:0]
+
+ALU 中所有移位操作仅使用 `B[4:0]`。SRAI 的 I 型立即数高 7 位是 `0100000`，必须掩码。
+
+### 乘除法多周期机制
+
+乘除法使用多周期 stall 架构（模板已实现）：
+
+| 阶段 | 信号/动作 |
+|------|----------|
+| 译码 | `is_mul=1` 或 `is_div=1` → `is_mul_div` 有效 |
+| 进入 stall | `mul_div_flag` 拉高，目标寄存器 `rf_wR_r` 锁存 |
+| 等待完成 | ALU 内部乘法器/除法器 `start` 启动，`busy` 拉高 |
+| 运算完成 | `mul_div_busy` 下降 → `inst_finished` 有效 → `rf_we1` 写回 |
+
+控制信号取值表中只需要 `is_mul`/`is_div`。`start`/`busy`/`done` 是 ALU 内部子模块（multiplier/divider）的接口信号，不在顶层控制信号表中。

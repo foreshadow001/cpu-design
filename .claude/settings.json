@@ -55,7 +55,10 @@
       "Bash(python design/graph/gen_44ins_excel.py)",
       "Bash(python design/graph/gen_44ins_v2.py)",
       "Bash(python design/graph/gen_44_final.py)",
-      "Bash(rm design/graph/gen_44_final.py)"
+      "Bash(rm design/graph/gen_44_final.py)",
+      "Bash(python fix_store_imm.py)",
+      "Bash(mv -f \"design/miniRV-全44条指令-数据通路与控制信号_tmp.xlsx\" \"design/miniRV-全44条指令-数据通路与控制信号.xlsx\")",
+      "Bash(python -c *)"
     ]
   }
 }

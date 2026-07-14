@@ -110,6 +110,17 @@ The course defines a systematic 5-step engineering method for CPU design:
 
 See `resources/单周期CPU设计方法论.md` for the detailed methodology and `resources/miniRV-控制信号取值表-完整.md` for the complete control signal table (all 44 instructions filled in).
 
+## Trace 测试框架约束（不可违反）
+
+修改任何 RTL 代码时必须遵守以下规则，否则 Trace 测试无法运行：
+
+1. **模块层次不可改动**：`miniRV_SoC → cpu_top → cpu_core`，模块名、实例名、`cpu_core` 的接口信号均固定。模板工程默认满足要求，不要改动。
+2. **不可修改** 所有源文件中任何出现 `RUN_TRACE` 宏定义的代码。
+3. **不可修改** 所有源文件中任何行内出现 `/* verilator public */` 的代码，且不能删除或修改此注释。
+4. **SoC 顶层复位信号** `fpga_rst` 在 Trace 测试框架中是**高电平复位**（与 Vivado 仿真中的低电平 `fpga_rst` 不同）。
+5. **系统复位后首条指令地址**是 `0x00000000`。
+6. **代码拷贝**：仅拷贝 `src/rtl/` 下的源文件到 `cdp-tests/mySoC/`，不拷贝 `ip/` 目录。
+
 ## Full miniRV Instruction Set (44 instructions)
 
 The demo implements 8 instructions. The full set includes 36 more (17 R-type, 7 more I-type, 3 S-type, 4 more B-type, 1 more U-type). Distribution:

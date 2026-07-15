@@ -11,93 +11,105 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1,295.467 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,444.668 ns"></ZoomEndTime>
-      <Cursor1Time time="1,320.000 ns"></Cursor1Time>
+      <ZoomStartTime time="1,259.467 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,442.668 ns"></ZoomEndTime>
+      <Cursor1Time time="1,290.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="234"></NameColumnWidth>
-      <ValueColumnWidth column_width="104"></ValueColumnWidth>
+      <ValueColumnWidth column_width="98"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
-   <wvobject fp_name="/soc_simple_tb/DUT/sys_rst" type="logic">
-      <obj_property name="ElementShortName">sys_rst</obj_property>
-      <obj_property name="ObjectShortName">sys_rst</obj_property>
-   </wvobject>
+   <WVObjectSize size="33" />
    <wvobject fp_name="/soc_simple_tb/DUT/sys_clk" type="logic">
       <obj_property name="ElementShortName">sys_clk</obj_property>
       <obj_property name="ObjectShortName">sys_clk</obj_property>
    </wvobject>
-   <wvobject fp_name="group20" type="group">
-      <obj_property name="label">Peripherals</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/soc_simple_tb/DUT/sw" type="array">
-         <obj_property name="ElementShortName">sw[15:0]</obj_property>
-         <obj_property name="ObjectShortName">sw[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/soc_simple_tb/DUT/led" type="array">
-         <obj_property name="ElementShortName">led[15:0]</obj_property>
-         <obj_property name="ObjectShortName">led[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/soc_simple_tb/DUT/dig_en" type="array">
-         <obj_property name="ElementShortName">dig_en[7:0]</obj_property>
-         <obj_property name="ObjectShortName">dig_en[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/soc_simple_tb/DUT/dig_seg" type="array">
-         <obj_property name="ElementShortName">dig_seg[7:0]</obj_property>
-         <obj_property name="ObjectShortName">dig_seg[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/soc_simple_tb/DUT/rx" type="logic">
-         <obj_property name="ElementShortName">rx</obj_property>
-         <obj_property name="ObjectShortName">rx</obj_property>
-      </wvobject>
-      <wvobject fp_name="/soc_simple_tb/DUT/tx" type="logic">
-         <obj_property name="ElementShortName">tx</obj_property>
-         <obj_property name="ObjectShortName">tx</obj_property>
-      </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/cpu_rst" type="logic">
+      <obj_property name="ElementShortName">cpu_rst</obj_property>
+      <obj_property name="ObjectShortName">cpu_rst</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ifetch_req" type="logic">
-      <obj_property name="ElementShortName">ifetch_req</obj_property>
-      <obj_property name="ObjectShortName">ifetch_req</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/pc[31:0]" type="array">
+      <obj_property name="ElementShortName">pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ifetch_addr" type="array">
-      <obj_property name="ElementShortName">ifetch_addr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ifetch_addr[31:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/id_ex_pc[31:0]" type="array">
+      <obj_property name="ElementShortName">id_ex_pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_ex_pc[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ifetch_valid" type="logic">
-      <obj_property name="ElementShortName">ifetch_valid</obj_property>
-      <obj_property name="ObjectShortName">ifetch_valid</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/id_fwd_rd1[31:0]" type="array">
+      <obj_property name="ElementShortName">id_fwd_rd1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_fwd_rd1[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ifetch_inst" type="array">
-      <obj_property name="ElementShortName">ifetch_inst[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ifetch_inst[31:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/id_fwd_rd2[31:0]" type="array">
+      <obj_property name="ElementShortName">id_fwd_rd2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_fwd_rd2[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_ren" type="array">
-      <obj_property name="ElementShortName">daccess_ren[3:0]</obj_property>
-      <obj_property name="ObjectShortName">daccess_ren[3:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/id_ex_rd1[31:0]" type="array">
+      <obj_property name="ElementShortName">id_ex_rd1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_ex_rd1[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_addr" type="array">
-      <obj_property name="ElementShortName">daccess_addr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">daccess_addr[31:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/id_ex_rd2[31:0]" type="array">
+      <obj_property name="ElementShortName">id_ex_rd2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_ex_rd2[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_rvalid" type="logic">
-      <obj_property name="ElementShortName">daccess_rvalid</obj_property>
-      <obj_property name="ObjectShortName">daccess_rvalid</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/forward_a[1:0]" type="array">
+      <obj_property name="ElementShortName">forward_a[1:0]</obj_property>
+      <obj_property name="ObjectShortName">forward_a[1:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_rdata" type="array">
-      <obj_property name="ElementShortName">daccess_rdata[31:0]</obj_property>
-      <obj_property name="ObjectShortName">daccess_rdata[31:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/forward_b[1:0]" type="array">
+      <obj_property name="ElementShortName">forward_b[1:0]</obj_property>
+      <obj_property name="ObjectShortName">forward_b[1:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_wen" type="array">
-      <obj_property name="ElementShortName">daccess_wen[3:0]</obj_property>
-      <obj_property name="ObjectShortName">daccess_wen[3:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ex_alu_a[31:0]" type="array">
+      <obj_property name="ElementShortName">ex_alu_a[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_alu_a[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_wdata" type="array">
-      <obj_property name="ElementShortName">daccess_wdata[31:0]</obj_property>
-      <obj_property name="ObjectShortName">daccess_wdata[31:0]</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ex_alu_b[31:0]" type="array">
+      <obj_property name="ElementShortName">ex_alu_b[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_alu_b[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/daccess_wresp" type="logic">
-      <obj_property name="ElementShortName">daccess_wresp</obj_property>
-      <obj_property name="ObjectShortName">daccess_wresp</obj_property>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ex_alu_c[31:0]" type="array">
+      <obj_property name="ElementShortName">ex_alu_c[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_alu_c[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ex_mem_alu_c[31:0]" type="array">
+      <obj_property name="ElementShortName">ex_mem_alu_c[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_mem_alu_c[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/U_ALU/a_latched[31:0]" type="array">
+      <obj_property name="ElementShortName">a_latched[31:0]</obj_property>
+      <obj_property name="ObjectShortName">a_latched[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/U_ALU/b_latched[31:0]" type="array">
+      <obj_property name="ElementShortName">b_latched[31:0]</obj_property>
+      <obj_property name="ObjectShortName">b_latched[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/U_ALU/op_r[4:0]" type="array">
+      <obj_property name="ElementShortName">op_r[4:0]</obj_property>
+      <obj_property name="ObjectShortName">op_r[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/U_ALU/multi_active" type="logic">
+      <obj_property name="ElementShortName">multi_active</obj_property>
+      <obj_property name="ObjectShortName">multi_active</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/U_ALU/U_div/quotient[31:0]" type="array">
+      <obj_property name="ElementShortName">d_quotient[31:0]</obj_property>
+      <obj_property name="ObjectShortName">d_quotient[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/U_ALU/U_div/count[5:0]" type="array">
+      <obj_property name="ElementShortName">d_count[5:0]</obj_property>
+      <obj_property name="ObjectShortName">d_count[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/id_ex_is_div" type="logic">
+      <obj_property name="ElementShortName">id_ex_is_div</obj_property>
+      <obj_property name="ObjectShortName">id_ex_is_div</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/mul_div_stall" type="logic">
+      <obj_property name="ElementShortName">mul_div_stall</obj_property>
+      <obj_property name="ObjectShortName">mul_div_stall</obj_property>
+   </wvobject>
+   <wvobject fp_name="/soc_simple_tb/DUT/U_cpu/U_core/ex_mul_div_busy" type="logic">
+      <obj_property name="ElementShortName">ex_mul_div_busy</obj_property>
+      <obj_property name="ObjectShortName">ex_mul_div_busy</obj_property>
    </wvobject>
 </wave_config>

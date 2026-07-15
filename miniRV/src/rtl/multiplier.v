@@ -18,6 +18,7 @@ module multiplier #(
     reg [WIDTH-1:0] product_lo   /* verilator public */;
     reg [WIDTH-1:0] multiplicand /* verilator public */;
     reg [5:0]       count        /* verilator public */;
+    reg             start_d;
 
     assign busy = (count != 0);
     assign z    = {product_hi[WIDTH-1:0], product_lo};
@@ -31,21 +32,28 @@ module multiplier #(
         ? {hi_sum[0], product_lo[WIDTH-1:1]}
         : {product_hi[0], product_lo[WIDTH-1:1]};
 
+    // Edge-triggered start: only fire on rising edge, prevent restart
+    wire start_rise = start && !start_d;
+
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             count        <= 0;
             multiplicand <= 0;
             product_hi   <= 0;
             product_lo   <= 0;
-        end else if (start && count == 0) begin
-            count        <= WIDTH;
-            multiplicand <= x;
-            product_hi   <= 0;
-            product_lo   <= y;
-        end else if (count > 0) begin
-            product_hi <= next_hi;
-            product_lo <= next_lo;
-            count      <= count - 1;
+            start_d      <= 0;
+        end else begin
+            start_d <= start;
+            if (start_rise) begin
+                count        <= WIDTH;
+                multiplicand <= x;
+                product_hi   <= 0;
+                product_lo   <= y;
+            end else if (count > 0) begin
+                product_hi <= next_hi;
+                product_lo <= next_lo;
+                count      <= count - 1;
+            end
         end
     end
 

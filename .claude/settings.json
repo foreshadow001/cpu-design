@@ -58,7 +58,12 @@
       "Bash(rm design/graph/gen_44_final.py)",
       "Bash(python fix_store_imm.py)",
       "Bash(mv -f \"design/miniRV-全44条指令-数据通路与控制信号_tmp.xlsx\" \"design/miniRV-全44条指令-数据通路与控制信号.xlsx\")",
-      "Bash(python -c *)"
+      "Bash(python -c *)",
+      "Bash(cp \"miniRV.sim/sim_1/behav/xsim/IROM.mif\" \"src/rtl/ip/IROM/IROM.mif\")",
+      "Bash(cp \"miniRV.sim/sim_1/behav/xsim/IROM.mif\" \"miniRV.ip_user_files/mem_init_files/IROM.mif\")",
+      "Bash(python gen_wcfg.py)",
+      "Bash(python -c \"import xml.etree.ElementTree as ET; ET.parse\\('soc_simple_tb.wcfg'\\); print\\('XML valid'\\)\")",
+      "Bash(rm gen_wcfg.py)"
     ]
   }
 }

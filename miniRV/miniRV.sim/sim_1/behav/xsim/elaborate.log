@@ -7,9 +7,9 @@ Starting static elaboration
 Pass Through NonSizing Optimizer
 WARNING: [VRFC 10-3091] actual bit length 24 differs from formal bit length 16 for port 'sw' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/sim/soc_simple_tb.v:29]
 WARNING: [VRFC 10-3091] actual bit length 24 differs from formal bit length 16 for port 'led' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/sim/soc_simple_tb.v:30]
-WARNING: [VRFC 10-3091] actual bit length 64 differs from formal bit length 66 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:99]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:120]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'r' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:121]
+WARNING: [VRFC 10-3091] actual bit length 64 differs from formal bit length 66 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:111]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'z' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:132]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 33 for port 'r' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:133]
 WARNING: [VRFC 10-3091] actual bit length 30 differs from formal bit length 14 for port 'addra' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Inst_ROM.v:21]
 WARNING: [VRFC 10-3091] actual bit length 30 differs from formal bit length 15 for port 'addra' [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Data_RAM.v:25]
 Completed static elaboration
@@ -21,11 +21,10 @@ Compiling module unisims_ver.PLLE2_ADV(CLKFBOUT_MULT=17,CLKIN...
 Compiling module unisims_ver.BUFG
 Compiling module xil_defaultlib.clk_wiz_0_clk_wiz
 Compiling module xil_defaultlib.clk_wiz_0
-Compiling module xil_defaultlib.NPC
-Compiling module xil_defaultlib.PC
 Compiling module xil_defaultlib.Controller
 Compiling module xil_defaultlib.RF
 Compiling module xil_defaultlib.SEXT
+Compiling module xil_defaultlib.ForwardingUnit
 Compiling module xil_defaultlib.multiplier_default
 Compiling module xil_defaultlib.multiplier(WIDTH=33)
 Compiling module xil_defaultlib.divider
@@ -33,7 +32,7 @@ Compiling module xil_defaultlib.divider(WIDTH=33)
 Compiling module xil_defaultlib.ALU
 Compiling module xil_defaultlib.MREQ
 Compiling module xil_defaultlib.MEXT
-Compiling module xil_defaultlib.cpu_core
+Compiling module xil_defaultlib.cpu_core_pipeline
 Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_output_stage(...
 Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_softecc_outpu...
 Compiling module blk_mem_gen_v8_4_7.blk_mem_gen_v8_4_7_mem_module(C_...

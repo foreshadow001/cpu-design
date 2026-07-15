@@ -18,7 +18,7 @@ module soc_simple_tb();
 
     always @(*) begin
         if (DUT.U_cpu.U_core.ifetch_valid && DUT.U_cpu.U_core.ifetch_inst == 32'h73) begin
-            #20 $display("Test Passed!");
+            $display("Test Passed!");
             $finish;
         end
     end

@@ -10,28 +10,55 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design
 INFO: [VRFC 10-311] analyzing module ALU
 WARNING: [VRFC 10-3380] identifier 'a_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:42]
 WARNING: [VRFC 10-3380] identifier 'b_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:43]
-WARNING: [VRFC 10-3380] identifier 'a_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:46]
-WARNING: [VRFC 10-3380] identifier 'a_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:48]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Controller.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Controller
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Data_RAM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Data_RAM
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ForwardingUnit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ForwardingUnit
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Inst_ROM.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Inst_ROM
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/MEXT.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module MEXT
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/MREQ.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module MREQ
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/NPC.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module NPC
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/PC.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module PC
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/RF.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module RF
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/SEXT.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module SEXT
-INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module cpu_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_core_pipeline
+WARNING: [VRFC 10-2938] 'ex_mem_rf_we' is already implicitly declared on line 273 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:342]
+WARNING: [VRFC 10-2938] 'ex_mem_rd' is already implicitly declared on line 272 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:346]
+WARNING: [VRFC 10-2938] 'mem_wb_rf_we' is already implicitly declared on line 275 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:418]
+WARNING: [VRFC 10-2938] 'mem_wb_rd' is already implicitly declared on line 274 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:420]
+WARNING: [VRFC 10-2938] 'wb_rf_wD' is already implicitly declared on line 112 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:489]
+WARNING: [VRFC 10-2938] 'wb_rf_we' is already implicitly declared on line 110 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:498]
+WARNING: [VRFC 10-2938] 'wb_rf_wR' is already implicitly declared on line 111 [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:499]
+WARNING: [VRFC 10-3380] identifier 'stall_f' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:40]
+WARNING: [VRFC 10-3380] identifier 'pc_next' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:41]
+WARNING: [VRFC 10-3380] identifier 'flush_f' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:56]
+WARNING: [VRFC 10-3380] identifier 'stall_f' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:59]
+WARNING: [VRFC 10-3380] identifier 'flush_d' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:166]
+WARNING: [VRFC 10-3380] identifier 'stall_d' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:177]
+WARNING: [VRFC 10-3380] identifier 'id_fwd_rd1' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:179]
+WARNING: [VRFC 10-3380] identifier 'id_store_data' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:180]
+WARNING: [VRFC 10-3380] identifier 'ex_br' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:211]
+WARNING: [VRFC 10-3380] identifier 'ex_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:216]
+WARNING: [VRFC 10-3380] identifier 'mul_div_release' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:220]
+WARNING: [VRFC 10-3380] identifier 'mul_div_release' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:225]
+WARNING: [VRFC 10-3380] identifier 'ex_mul_div_busy' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:245]
+WARNING: [VRFC 10-3380] identifier 'ex_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:283]
+WARNING: [VRFC 10-3380] identifier 'ex_mem_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:285]
+WARNING: [VRFC 10-3380] identifier 'wb_forward_data' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:287]
+WARNING: [VRFC 10-3380] identifier 'ex_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:291]
+WARNING: [VRFC 10-3380] identifier 'ex_mem_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:293]
+WARNING: [VRFC 10-3380] identifier 'wb_forward_data' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:295]
+WARNING: [VRFC 10-3380] identifier 'ex_mem_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:301]
+WARNING: [VRFC 10-3380] identifier 'ex_mem_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:309]
+WARNING: [VRFC 10-3380] identifier 'wb_forward_data' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:310]
+WARNING: [VRFC 10-3380] identifier 'ex_mem_alu_c' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:315]
+WARNING: [VRFC 10-3380] identifier 'wb_forward_data' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_core_pipeline.v:316]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/cpu_top.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module cpu_top
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/divider.v" into library xil_defaultlib

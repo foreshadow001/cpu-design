@@ -43,9 +43,9 @@ module ALU (
                 if (b_latched[31]) c = c - a_latched;
             end
             `ALU_MULHU: c = mulu_res[63:32];
-            `ALU_DIV  : c = (a_latched[31] ^ b_latched[31]) ? (-$signed(div_quo)) : div_quo;
+            `ALU_DIV  : c = (a[31] ^ b[31]) ? (-$signed(div_quo)) : div_quo;
             `ALU_DIVU : c = divu_quo;
-            `ALU_REM  : c = a_latched[31] ? (-$signed(div_rem)) : div_rem;
+            `ALU_REM  : c = a[31] ? (-$signed(div_rem)) : div_rem;
             `ALU_REMU : c = divu_rem;
             default   : c = 32'h0;
         endcase
@@ -71,13 +71,25 @@ module ALU (
 
     // Latch operands for signed correction in mulh
     reg [31:0] a_latched /* verilator public */, b_latched /* verilator public */;
-    always @(posedge clk) begin
-        if (mul_flag | mulu_flag | div_flag | divu_flag) begin
-            a_latched <= a;
-            b_latched <= b;
-            op_r <= op;
-        end else if (!busy)
-            op_r <= 4'h0;
+    // Latch operands only at start of multi-cycle op; hold during stall
+    reg multi_active /* verilator public */;
+    wire multi_start = (mul_flag | mulu_flag | div_flag | divu_flag) & !multi_active;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            multi_active <= 1'b0;
+            op_r         <= 5'h0;
+            a_latched    <= 32'h0;
+            b_latched    <= 32'h0;
+        end else if (multi_start) begin
+            a_latched    <= a;
+            b_latched    <= b;
+            op_r         <= op;
+            multi_active <= 1'b1;
+        end else if (multi_active && !busy) begin
+            op_r         <= 5'h0;
+            multi_active <= 1'b0;
+        end
     end
 
     multiplier #(32) U_mul (

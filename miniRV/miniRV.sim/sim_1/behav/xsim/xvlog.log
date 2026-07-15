@@ -8,6 +8,10 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design
 INFO: [VRFC 10-311] analyzing module clk_wiz_0
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ALU
+WARNING: [VRFC 10-3380] identifier 'a_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:42]
+WARNING: [VRFC 10-3380] identifier 'b_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:43]
+WARNING: [VRFC 10-3380] identifier 'a_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:46]
+WARNING: [VRFC 10-3380] identifier 'a_latched' is used before its declaration [D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/ALU.v:48]
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Controller.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Controller
 INFO: [VRFC 10-2263] Analyzing Verilog file "D:/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/Data_RAM.v" into library xil_defaultlib

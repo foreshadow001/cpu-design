@@ -1,0 +1,26 @@
+# Copy this to ~/my-cpu-test/Makefile
+# Rename addi.bin to meminit.bin or pass PATH=addi.bin
+
+VERILATOR = verilator
+VFLAGS = -cc --exe --build -j
+TRACE_FLAGS = --trace -Wno-lint -Wno-style -Wno-TIMESCALEMOD
+
+SRC = ALU.v Controller.v Data_RAM.v ForwardingUnit.v Inst_ROM.v \
+      MEXT.v MREQ.v NPC.v PC.v RF.v SEXT.v cpu_core.v cpu_top.v \
+      divider.v miniRV_SoC.v multiplier.v ram.v
+
+all: sim
+
+sim: ${SRC} sim_main.cpp
+	${VERILATOR} ${VFLAGS} ${TRACE_FLAGS} \
+		-DRUN_TRACE=1 \
+		+define+PATH=addi.bin \
+		-CFLAGS "-DPATH=addi.bin -O0 -g" \
+		--top-module miniRV_SoC \
+		${SRC} sim_main.cpp \
+		-I. \
+		-o sim
+	./obj_dir/sim
+
+clean:
+	rm -rf obj_dir sim

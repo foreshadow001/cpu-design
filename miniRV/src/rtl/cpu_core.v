@@ -371,7 +371,10 @@ module cpu_core(
 
     // Store data forwarding: rs2 in ID might need data from EX or MEM
     wire [31:0] id_store_data;
-    assign id_store_data = (ex_mem_rf_we && (ex_mem_rd != 5'h0) && (ex_mem_rd == id_rs2))
+    // Store data: check EX first for back-to-back (e.g., addi→sw)
+    assign id_store_data = (id_ex_rf_we && id_ex_rd != 0 && id_ex_rd == id_rs2)
+                         ? ex_alu_c
+                         : (ex_mem_rf_we && (ex_mem_rd != 5'h0) && (ex_mem_rd == id_rs2))
                          ? ex_mem_alu_c
                          : id_fwd_rd2;
 

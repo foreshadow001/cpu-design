@@ -175,7 +175,8 @@
       "Bash(wsl -d Ubuntu-24.04 -e bash -c \"cd /home/foreshadow/cdp-tests && make run_for_python TEST=rem 2>&1 | grep -A5 Diffrence\")",
       "Bash(wsl -d Ubuntu-24.04 -e bash -c \"cd /mnt/d/users/acad/2026.3/CPU/cpu-design/resources/test_case && cp /mnt/d/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/*.v . 2>/dev/null; cp /home/foreshadow/cdp-tests/bin/rem.bin addi.bin && rm -rf obj_dir sim && make -f Makefile_test 2>&1 | grep -E 'CYC.*0x00[0-2]|>>>' | head -50\")",
       "Bash(wsl -d Ubuntu-24.04 -e bash -c \"cd /mnt/d/users/acad/2026.3/CPU/cpu-design/resources/test_case && ./obj_dir/sim 2>&1 | grep '>>>' | head -15\")",
-      "Bash(wsl -d Ubuntu-24.04 -e bash -c \"cp /mnt/d/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/*.v /mnt/d/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/defines.vh /home/foreshadow/cdp-tests/mySoC/ && cd /home/foreshadow/cdp-tests && make build 2>&1 | tail -2 && make run_for_python TEST=rem 2>&1 | grep -A5 Diffrence && make run_for_python TEST=div 2>&1 | grep -A5 Diffrence\")"
+      "Bash(wsl -d Ubuntu-24.04 -e bash -c \"cp /mnt/d/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/*.v /mnt/d/users/acad/2026.3/CPU/cpu-design/miniRV/src/rtl/defines.vh /home/foreshadow/cdp-tests/mySoC/ && cd /home/foreshadow/cdp-tests && make build 2>&1 | tail -2 && make run_for_python TEST=rem 2>&1 | grep -A5 Diffrence && make run_for_python TEST=div 2>&1 | grep -A5 Diffrence\")",
+      "Bash(wsl -d Ubuntu-24.04 -- bash -lc \"cd /home/foreshadow/my-cpu-test && /usr/local/bin/verilator --version\")"
     ],
     "additionalDirectories": [
       "\\\\wsl.localhost\\Ubuntu-24.04\\home\\foreshadow\\cdp-tests\\mySoC",

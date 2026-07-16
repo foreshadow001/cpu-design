@@ -84,9 +84,14 @@ module cpu_core(
             pc       <= pc_next;
             fetch_pc <= pc_next;
         end else if (stall_f && !stall_synced) begin
-            // First stall cycle: sync fetch_pc to the held PC value
-            pc       <= pc;
-            fetch_pc <= pc;
+            // First stall: rewind for load-use, hold for mul/div
+            if (load_use_stall) begin
+                pc       <= pc - 32'h4;
+                fetch_pc <= pc - 32'h4;
+            end else begin
+                pc       <= pc;
+                fetch_pc <= pc;
+            end
         end else if (!stall_f && !flush_next
                       && !(mul_div_flush && flush_next2)
                       && !load_resync && !load_resync2) begin

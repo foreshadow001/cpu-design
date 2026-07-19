@@ -1,6 +1,4 @@
-`ifndef RUN_TRACE
-`define RUN_TRACE
-`endif
+// `define RUN_TRACE
 
 // `define ENABLE_ICACHE
 // `define ENABLE_DCACHE

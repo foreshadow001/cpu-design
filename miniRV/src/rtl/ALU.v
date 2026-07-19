@@ -23,8 +23,10 @@ module ALU (
     wire        div_busy, divu_busy;
     reg  [ 4:0] op_r /* verilator public */;
 
+    wire [4:0] effective_op = (op_r != 4'h0) ? op_r : op;
+
     always @(*) begin
-        case (op_r != 4'h0 ? op_r : op)
+        case (effective_op)
             `ALU_ADD  : c = a + b;
             `ALU_SUB  : c = a - b;
             `ALU_XOR  : c = a ^ b;

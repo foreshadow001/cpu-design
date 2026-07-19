@@ -260,8 +260,11 @@ module cpu_core(
      * Hazard Detection — Stall + Flush
      **********************************************************************/
     // Load-use hazard: load in EX, dependent instruction in ID (Phase 2)
+    // Only stall when instruction actually uses rs1/rs2 as registers
+    // (not as immediate bits, which can alias register numbers)
     wire load_use_stall = (id_ex_ram_rop != `RAM_EXT_N)
-                        & ((id_rs1 == id_ex_rd) | (id_rs2 == id_ex_rd))
+                        & (((id_rs1 == id_ex_rd) & !id_alua_sel)
+                         | ((id_rs2 == id_ex_rd) & !id_alub_sel))
                         & (id_ex_rd != 5'h0);
 
     // Control hazards (Phase 3)

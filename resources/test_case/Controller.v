@@ -114,11 +114,11 @@ module Controller (
     
     // alua_sel
     wire ALU_A_SEL_RS1 = ADDI | ADD | SUB | ORI | XORI | XOR | ANDI | AND | OR | SLTI | SLTIU | SLT | SLTU | SLLI | SRLI | SRAI | SLL | SRL | SRA | MUL | MULH | MULHU | DIV | DIVU | REM | REMU | LW | LB | LBU | LH | LHU | SB | SH | SW | BEQ | BNE | BLT | BGE | BLTU | BGEU | JAL | JALR;
-    wire ALU_A_SEL_PC  = AUIPC;
+    wire ALU_A_SEL_PC  = AUIPC | LUI;   // LUI doesn'\''t use ALU, but needs non-0 sel to suppress false load-use
                         
     // alub_sel
     wire ALU_B_SEL_RS2 = BEQ | BNE | BLT | BGE | BLTU | BGEU | SLL | SRL | SRA | ADD | SUB | XOR | AND | OR | SLT | SLTU | MUL | MULH | MULHU | DIV | DIVU | REM | REMU;
-    wire ALU_B_SEL_EXT = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW | LB | LBU | LH | LHU | SB | SH | SW | JAL | AUIPC | JALR;
+    wire ALU_B_SEL_EXT = ADDI | ORI | XORI | ANDI | SLTI | SLTIU | SLLI | SRLI | SRAI | LW | LB | LBU | LH | LHU | SB | SH | SW | JAL | AUIPC | JALR | LUI;
         
     // ram_r_op
     wire RAM_EXT_B  = LB;

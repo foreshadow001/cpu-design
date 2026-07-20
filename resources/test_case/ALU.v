@@ -8,7 +8,8 @@ module ALU (
     input  wire [ 4:0]  op /* verilator public */,
     input  wire [31:0]  a,
     input  wire [31:0]  b,
-    
+    input  wire         suppress,  // prevents multi-cycle start for duplicate MULs
+
     output reg  [31:0]  c,
     output reg          br,
     output wire         busy
@@ -23,7 +24,7 @@ module ALU (
     wire        div_busy, divu_busy;
     reg  [ 4:0] op_r /* verilator public */;
 
-    wire [4:0] effective_op = (op_r != 4'h0) ? op_r : op;
+    wire [4:0] effective_op = (multi_active && any_mul_div && op == op_r) ? op_r : op;
 
     always @(*) begin
         case (effective_op)
@@ -73,9 +74,24 @@ module ALU (
 
     // Latch operands for signed correction in mulh
     reg [31:0] a_latched /* verilator public */, b_latched /* verilator public */;
-    // Latch operands only at start of multi-cycle op; hold during stall
+    // Latch operands at start of multi-cycle op; hold during stall.
+    // Clear when MUL/DIV leaves EX (mul_flag drops), not when busy drops.
     reg multi_active /* verilator public */;
-    wire multi_start = (mul_flag | mulu_flag | div_flag | divu_flag) & !multi_active;
+    wire any_mul_div = mul_flag | mulu_flag | div_flag | divu_flag;
+    // Start on first entry OR when op changes to new MUL/DIV while multi_active
+    // Start: first entry (!multi_active) fires immediately.
+    // Consecutive MUL/DIV (multi_active && !busy) delayed 1 cycle so op_r
+    // captures the new instruction'"'"'s op.
+    wire need_continue = any_mul_div & multi_active & !busy;
+    reg  restart_continue;
+    always @(posedge clk or posedge rst) begin
+        if (rst) restart_continue <= 1'b0;
+        else     restart_continue <= need_continue;
+    end
+    wire op_first_mul = any_mul_div & !multi_active;
+    wire multi_start = (op_first_mul | restart_continue) & !suppress;
+
+    // Track busy falling edge (unused, kept for reference)
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin
@@ -88,7 +104,7 @@ module ALU (
             b_latched    <= b;
             op_r         <= op;
             multi_active <= 1'b1;
-        end else if (multi_active && !busy) begin
+        end else if (multi_active && !any_mul_div) begin
             op_r         <= 5'h0;
             multi_active <= 1'b0;
         end
@@ -99,7 +115,7 @@ module ALU (
         .rst    (rst),
         .x      (a),
         .y      (b),
-        .start  (mul_flag),
+        .start  (multi_start & mul_flag),
         .z      (mul_res),
         .busy   (mul_busy)
     );
@@ -109,7 +125,7 @@ module ALU (
         .rst    (rst),
         .x      ({1'b0, a}),
         .y      ({1'b0, b}),
-        .start  (mulu_flag),
+        .start  (multi_start & mulu_flag),
         .z      (mulu_res),
         .busy   (mulu_busy)
     );
@@ -119,7 +135,7 @@ module ALU (
         .rst    (rst),
         .x      (a[31] ? (~a + 1) : a),
         .y      (b[31] ? (~b + 1) : b),
-        .start  (div_flag),
+        .start  (multi_start & div_flag),
         .z      (div_quo),
         .r      (div_rem),
         .busy   (div_busy)
@@ -130,7 +146,7 @@ module ALU (
         .rst    (rst),
         .x      ({1'b0, a}),
         .y      ({1'b0, b}),
-        .start  (divu_flag),
+        .start  (multi_start & divu_flag),
         .z      (divu_quo),
         .r      (divu_rem),
         .busy   (divu_busy)
